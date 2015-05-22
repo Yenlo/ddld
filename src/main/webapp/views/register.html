@@ -1,0 +1,22 @@
+<div>
+  <form data-ng-submit="register()">
+    <div class="form-group">
+      <label class="control-label">Email</label>
+      <div class="controls">
+        <input type="text" class="form-control" data-ng-model="formEmail"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Password</label>
+      <div class="controls">
+        <input type="password" class="form-control" data-ng-model="formPassword"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="controls">
+        <button class="btn btn-primary margin" type="submit">Registreer</button>
+      </div>
+    </div>
+  </form>
+	<img data-ng-show="loading" class="img-responsive center-block" src="/static/imagery/loader.gif" width="64px" height="64px"/>
+</div>

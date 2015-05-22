@@ -1,0 +1,40 @@
+* {
+    line-height: 125%;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+div > div {
+    display: inline-block;
+
+}
+
+div.search {
+    width: 50em;
+}
+
+input[type="text"] {
+    width: 90%;
+}
+.dropdown-menu {
+    width: 45em;
+}
+
+div.topics, div.authors {
+    width: 20em;
+}
+
+ul {
+    display: inline-block;
+    float: left;
+    margin: 1em;
+    padding: 0;
+    width: 19em;
+}
+
+li > span {
+    opacity: 0.6;
+}

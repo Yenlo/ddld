@@ -1,0 +1,48 @@
+<div>
+  	<p class="lead">
+  		Let op - dit zijn statische demo gegevens.
+  	</p>
+	<svg data-ng-cloak height="900" width="1000">
+		<g data-ng-attr-transform="{{ 'translate(0, 50) scale(' + scale + ',' + scale + ')' }}">
+			<g data-ng-repeat="item in items | setReverseIndex:this | reverse">
+				<text data-ng-attr-x="{{ 15 + relativePosition(item) * 1000 * scale }}"
+					  data-ng-attr-y="{{  4 + item.reverseIndex * 20 }}"
+					  data-ng-click="setShowpath(item)">{{ item.url }}</text>
+				<path data-ng-attr-d="{{ qbcPath(item, 1000 * scale, 20) }}"
+					  data-ng-attr-stroke="{{ item.showpath ? '#F00' : '#000' }}"
+					  data-ng-attr-stroke-width="{{ item.showpath ? 4 : 2 }}"
+					  data-ng-click="setShowpath(item)"
+					  fill="none"/>
+				<circle data-ng-show="item.highlight"
+						data-ng-attr-cx="{{ relativePosition(item) * 1000 * scale }}"
+						data-ng-attr-cy="{{ item.reverseIndex * 20 }}"
+						data-ng-click="setShowpath(item)"
+						r="11"/>
+				<circle data-ng-show="item.highlight "
+						data-ng-attr-cx="{{ relativePosition(item) * 1000 * scale }}"
+						data-ng-attr-cy="{{ item.reverseIndex * 20 }}"
+						fill="#ff0"
+						data-ng-click="setShowpath(item)"
+						r="10"/>
+				<circle data-ng-attr-cx="{{ relativePosition(item) * 1000 * scale }}"
+						data-ng-attr-cy="{{ item.reverseIndex * 20 }}"
+						data-ng-attr-fill="{{ item.showpath ? '#F00' : '#000' }}"
+						data-ng-click="setShowpath(item)"
+						r="5"/>
+			</g>
+		</g>
+	</svg>
+	<p>
+		<input type="button" data-ng-click="scale = scale - 0.1" data-ng-disabled="scale < 0.3" value="Zoom Out ( Scale )"/>
+		<input type="button" data-ng-click="scale = scale + 0.1" value="Zoom In ( Scale )"/>
+		<input type="button" data-ng-click="min = min + 10000; max = max - 10000" data-ng-disabled="max - min < 30000" value="Widen ( Time )"/>
+		<input type="button" data-ng-click="min = min - 10000; max = max + 10000" value="Flatten ( Time )"/>
+		<input type="button" data-ng-click="min = min - 10000; max = max - 10000" value="&laquo;Move"/>
+		<input type="button" data-ng-click="min = min + 10000; max = max + 10000" value="Move &raquo;"/>
+	</p>
+
+	<h2>Highlights</h2>
+	<p data-ng-repeat="item in items | filter: { highlight: 'true'}">
+		{{ item.url }}
+	</p>
+</div>

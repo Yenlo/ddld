@@ -1,0 +1,93 @@
+.vertical-margin {
+  margin-bottom: 5px;
+}
+
+.horizontal-margin {
+  margin-right: 5px;
+}
+
+.margin {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+html, body {
+  min-height: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  padding-top: 70px;
+}
+
+[data-ng-click] {
+	cursor: pointer;
+}
+
+.alert {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.repeat-item.ng-enter {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.repeat-item.ng-enter,
+.repeat-item.ng-leave.ng-leave-active {
+  opacity:0;
+}
+.repeat-item.ng-leave,
+.repeat-item.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+.factcheck-list li {
+	padding: 3px;
+}
+
+.factcheck-list .selected {
+	outline: 2px dashed lightblue;
+}
+
+.nav-custom
+{
+	box-sizing: border-box;
+	color: rgb(153, 153, 153);
+	display: block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	height: 50px;
+	font-style:italic;
+	line-height: 20px;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	padding: 15px;
+	position: relative;
+	text-align: left;
+	text-decoration: none solid rgb(153, 153, 153);
+	cursor: default;
+}
+
+.highlighted
+{
+	background: #FFFFC0;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+svg {
+  border: 1px solid black;
+  /* fix for ie */
+  overflow: hidden;
+}
+
+body.sidebar {
+	padding-top: 0px;
+}

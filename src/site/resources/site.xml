@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/DECORATION/1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
+	name="Apache Maven Fluido-Skin">
+
+	<bannerLeft>
+		<name>Yenlo</name>
+		<href>www.yenlo.nl</href>
+		<src>http://buildserver.nl.yenlo/sites/images/yenlo_transparant_kleiner.png</src>
+	</bannerLeft>
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.3.0</version>
+	</skin>
+
+	<body>
+		<menu name="${project.name}">
+			<item name="Introduction" href="index.html" />
+		</menu>
+		<menu ref="reports" />
+		<menu ref="modules" />
+		<menu name="External links" />
+	</body>
+
+</project>

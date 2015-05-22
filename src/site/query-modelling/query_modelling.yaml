@@ -1,0 +1,13 @@
+flask:
+  # Keep SERVER_NAME and APP_HOST/APP_PORT in sync or Flask will get
+  # confused...
+  SERVER_NAME: "0.0.0.0:5050"
+  APP_HOST: "0.0.0.0"
+  APP_PORT: 5050
+  DEBUG: True
+corpus:
+  filename: "test.bz2"
+  cutoff_frequency: 1
+  # Web1T (LDC2009T25) has a unigram frequency cutoff of 40
+  # filename: "LDC2009T25/data/DUTCH/1gms/vocab.bz2"
+  # cutoff_frequency: 40

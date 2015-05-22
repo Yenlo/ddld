@@ -1,0 +1,9 @@
+Vagrant::Config.run do |config|
+  config.vm.box       = "suse_12_3"
+  config.vm.box_url   = "http://sourceforge.net/projects/opensusevagrant/files/12.3/opensuse-12.3-64.box/"
+  config.vm.forward_port 80, 80
+  config.vm.forward_port 443, 443
+  config.vm.forward_port 9990, 9990
+  config.vm.forward_port 9999, 9999
+  config.vm.provision :shell, :path => "provision.sh"
+end

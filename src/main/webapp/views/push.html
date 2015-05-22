@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa fa-upload fa-fw"></i>Push-bron Aanmaken</div>
+      <div class="panel-body">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Omschrijving Bron</label>
+            <div class="col-lg-10">
+              <input type="text" placeholder="Omschrijving" data-ng-model="title" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">URL</label>
+            <div class="col-lg-10">
+             <input type="text" placeholder="http://bron.example.com/artikelen" data-ng-model="root" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Diepte vanaf URL</label>
+            <div class="col-lg-10">
+              <input type="text" placeholder="2" data-ng-model="depth" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" data-ng-model="external"/>Ook links naar externe sites
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Ophalen</label>
+            <div class="col-lg-10">
+              <select data-ng-model="type" class="form-control" data-ng-options="key as value.description for (key , value) in crawlTypes"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Frequentie</label>
+            <div class="col-lg-10">
+              <select data-ng-model="frequencyType" class="form-control" data-ng-options="key as value.description(frequency) for (key , value) in frequencyTypes"></select>
+            </div>
+          </div>
+          <div class="form-group" data-ng-show="frequencyType && frequencyTypes[frequencyType].hasInterval">
+            <label class="col-lg-2 control-label">Interval</label>
+            <div class="col-lg-10">
+              <input type="text" data-ng-model="frequency" data-ng-change="frequency = asNumber(frequency)" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Individuele keywords</label>
+            <div class="col-lg-10">
+              <input type="text" placeholder="item, voorbeeld, komma" data-ng-model="filter" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+              <button data-ng-disabled="createState == 'loading'" data-ng-click="createCrawler(title, root, depth, external, type, frequencyType, frequency, filter)" class="btn btn-primary">Nieuw</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa fa-circle-o fa-fw"></i>Bronnen ( {{ crawlers.length }} )</div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Omschrijving</th>
+              <th>URL</th>
+              <th>Diepte</th>
+              <th>Type</th>
+              <th>Frequentie</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="crawler in crawlers">
+              <td>{{ crawler.title }}</td>
+              <td>{{ crawler.crawlRoot }}</td>
+              <td>{{ crawler.crawlDepth }}</td>
+              <td>{{ crawlTypes[crawler.crawlType].description }}{{ crawler.crawlExternal ? "" : ", alleen intern" }}</td>
+              <td>{{ frequencyTypes[crawler.crawlFrequencyType].description(crawler.crawlFrequency) }}</td>
+              <td>
+                <button data-ng-click="deleteCrawler(crawler.id)" class="btn btn-warning">Verwijder</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="container-fluid" data-ng-cloak>
+  <div class="row">
+
+	<!-- main content -->
+    <div class="col-lg-7 col-lg-offset-1">
+
+	  <!-- search bar -->
+      <div class="row">
+        <div class="col-md-12">
+          <form data-ng-submit="search.query(search.input)">
+            <div class="form-group">
+              <label class="control-label">Zoekterm</label>
+              <div class="controls">
+                <div class="input-group">
+                  <input type="text" class="form-control" data-ng-model="search.input" data-ng-change="search.queryDebounce(search.input)">
+                  <div class="input-group-btn">
+                    <a class="btn btn-primary" data-ng-click="search.query(search.input)"><i class="fa fa-search"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- options regarding sources -->
+	  <div data-ng-repeat="source in sources">
+	    <div data-ng-switch="$index % 2">
+	      <div data-ng-switch-when="0">
+	        <div class="row">
+	          <div class="col-md-6" data-ng-show="sources[$index+0]">
+			    <p>{{ sources[$index+0].type }}</p>
+	            <button class="btn btn-primary margin" data-ng-repeat="item in sources[$parent.$index+0].items" data-ng-model="item.enabled" btn-checkbox>{{ item.name }} <img src="/static/imagery/check.png" data-ng-show="item.enabled"/></button>
+			  </div>
+	          <div class="col-md-6" data-ng-show="sources[$index+1]">
+			    <p>{{ sources[$index+1].type }}</p>
+	            <button class="btn btn-primary margin" data-ng-repeat="item in sources[$parent.$index+1].items" data-ng-model="item.enabled" btn-checkbox>{{ item.name }} <img src="/static/imagery/check.png" data-ng-show="item.enabled"/></button>
+			  </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+    <!-- aside containing factcheck controls -->
+    <div class="col-lg-4">
+        <h4>Factchecks</h4>
+        <div data-ng-repeat="item in factchecks.items" class="clearfix">
+            {{ item.name }}
+            <a class="pull-right btn btn-primary margin" data-ng-click="factchecks.remove(item)">Verwijder</a>
+            <a class="pull-right btn btn-primary margin" data-ng-click="factchecks.select(item)" data-ng-disabled="item.id == factchecks.active">
+             {{ item.id == factchecks.active ? "Actief" : "Activeer" }}
+             <img src="/static/imagery/check.png" data-ng-show="item.id == factchecks.active"></a>
+        </div>
+        <a class="btn btn-primary margin" data-toggle="modal" data-target="#newFactcheckModal">Nieuw</a>
+        <img class="img-responsive center-block" data-ng-show="factchecks.select.loading || factchecks.remove.loading" src="/static/imagery/loader.gif" width="32px" height="32px"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <hr>
+	  <div data-ng-repeat="(engine, data) in results">
+		<div class="row">
+		  <div class="col-md-12">
+		  	<h2>{{ engine }}</h2>
+		  	<p data-ng-show="data.state == 'loading'">
+				<img class="img-responsive center-block" src="/static/imagery/loader.gif" width="32px" height="32px"/>
+			</p>
+		  	<p data-ng-show="data.state == 'erred'">( Erred... )</p>
+		    <p data-ng-show="data.estimatedHits > 0">{{ data.estimatedHits }} hits.</p>
+		    <p data-ng-show="data.estimatedHits <= 0">{{ data.items.length }} resultaten ontvangen.</p>
+		  </div>
+		</div>
+		
+  	    <div class="row repeat-item" data-ng-repeat="item in data.items" data-ng-class="{'highlighted': item.highlighted}">
+    	  <div class="col-md-12 clearfix">
+		    <h4><i class="fa fa-angle-right"></i> <a data-ng-href="{{ item.url }}" target="_blank">{{ item.title | characters: 150 }}</a></h4>
+		    <span data-ng-show="engine == 'dld'" class="pull-right" style="margin: 3px;">
+		      <span data-ng-hide="item.removeDisabled">
+			    <a data-ng-click="search.highlight(item)">Highlight</a>
+			    /
+			    <a data-ng-click="search.remove(item)">Verwijder</a>
+			  </span>
+		      <span data-ng-show="item.removeDisabled">Verwijderd</span>
+		    </span>
+		    <p>{{ item.content | characters: 400 }}</p>
+		  </div>
+        </div>
+        <hr/>
+	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newFactcheckModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Nieuwe factcheck beginnen</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Topic</label>
+								<div class="controls">
+								<input type="text" class="form-control" data-ng-model="modal.name">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+				<button type="button" class="btn btn-primary" data-ng-click="modal.create()">Aanmaken</button>
+			</div>
+		</div>
+	</div>
+</div>

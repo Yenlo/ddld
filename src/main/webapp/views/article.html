@@ -1,0 +1,7 @@
+<div>
+  	<img data-ng-show="loading" class="img-responsive center-block" src="/static/imagery/loader.gif" width="64px" height="64px"/>
+    <h1>{{ article.title }}</h1>
+    <p data-ng-repeat="paragraph in article.paragraphs">
+  	  {{ paragraph }}
+    </p>
+</div>
